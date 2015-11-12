@@ -1,0 +1,92 @@
+--- 2.a)
+BOBJ> in counter.bob
+==========================================
+obj COUNTER
+
+
+--- 2.b)
+BOBJ> parse reset .
+time: 15ms
+result:
+reset : -> Counter
+
+BOBJ> parse inc(reset)
+.
+time: 15ms
+result:
+inc : Counter -> Counter
+  reset : -> Counter
+
+BOBJ> parse reset .
+time: 0ms
+result:
+reset : -> Counter
+
+BOBJ> parse inc(reset) .
+time: 0ms
+result:
+inc : Counter -> Counter
+  reset : -> Counter
+
+BOBJ> parse inc(dec(reset)) .
+time: 0ms
+result:
+inc : Counter -> Counter
+  dec : Counter -> Counter
+    reset : -> Counter
+    
+BOBJ> parse dec .
+==========================================
+No parse for dec at line 1.
+BOBJ> parse reset(inc) .
+==========================================
+No parse for reset ( inc ) at line 1.
+
+
+2.d)
+BOBJ> red reset .
+==========================================
+reduce in COUNTER : reset
+result Counter: reset
+rewrite time: 0ms       parse time: 0ms
+BOBJ> red inc(reset)
+.
+==========================================
+reduce in COUNTER : inc(reset)
+result Counter: inc(reset)
+rewrite time: 0ms       parse time: 0ms
+BOBJ> red reset .
+==========================================
+reduce in COUNTER : reset
+result Counter: reset
+rewrite time: 0ms       parse time: 0ms
+BOBJ> red inc(reset) .
+==========================================
+reduce in COUNTER : inc(reset)
+result Counter: inc(reset)
+rewrite time: 0ms       parse time: 0ms
+BOBJ> red inc(dec(reset)) .
+==========================================
+reduce in COUNTER : inc(dec(reset))
+result Counter: reset
+rewrite time: 0ms       parse time: 0ms
+BOBJ> red dec .
+==========================================
+No parse for dec at line 1.
+BOBJ> red reset(inc).
+==========================================
+No parse for reset ( inc ) at line 2.
+
+
+2.f)
+BOBJ> in ringCounter.bob
+==========================================
+obj RINGCOUNTER
+==========================================
+reduce in RINGCOUNTER : inc(max) == reset
+result Bool: true
+rewrite time: 0ms       parse time: 0ms
+==========================================
+reduce in RINGCOUNTER : dec(reset) == max
+result Bool: true
+rewrite time: 0ms       parse time: 0ms

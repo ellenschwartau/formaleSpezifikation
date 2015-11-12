@@ -1,0 +1,11 @@
+obj COUNTER is
+  sorts Counter .
+  op reset : -> Counter .
+  op inc : Counter -> Counter .
+  op dec : Counter -> Counter .
+  
+  var C : Counter .
+  eq inc(dec(C)) = C .
+  eq dec(inc(C)) = C .
+  
+endo

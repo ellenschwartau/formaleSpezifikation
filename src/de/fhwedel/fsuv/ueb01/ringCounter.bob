@@ -1,0 +1,18 @@
+obj RINGCOUNTER is
+  sorts RINGCOUNTER .
+  
+  op reset : -> RINGCOUNTER .
+  op max : -> RINGCOUNTER .
+  op inc : RINGCOUNTER -> RINGCOUNTER .
+  op dec : RINGCOUNTER -> RINGCOUNTER .
+  
+  var C : RINGCOUNTER .
+  eq inc(dec(C)) = C .
+  eq dec(inc(C)) = C .
+  eq inc(max) = reset .
+  eq dec(reset) = max .
+  
+endo
+
+reduce inc(max) == reset .
+reduce dec(reset) == max .
