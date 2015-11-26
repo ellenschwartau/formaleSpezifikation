@@ -1,0 +1,34 @@
+1. Auf dem Handout-Server findet sich die Spezifikation einer Liste ganzer Zahlen im File
+list.bob mit den Operationen cons, length, head und append. Leere Listen sind durch
+die Konstante nil definiert.
+
+(a) Laden Sie die Listen-Spezifikation und studieren Sie sie bitte. Sehen Sie sich die
+Spezifikation der Operation head genau an. Wie geht sie mit leeren Listen um?
+
+Die Behandlung des Aufrufs von head mit einer leeren Liste ist nicht definiert.
+reduce ergibt nur das Ergebnis Int:
+==========================================
+reduce in LIST-OF-INT : head(nil)
+result Int: head(nil)
+rewrite time: 0ms       parse time: 0ms
+==========================================
+Welcher Int genau zurückgegeben wird ist aber nicht genauer spezifiziert.
+
+
+(b) Ergänzen sie die Spezifikation um die Operation tail, die den Rest einer Liste
+(ohne das vorderste Element) bestimmt. Wie sieht die Signatur aus? Durch welche
+Gleichungen wird ihr Verhalten bestimmt. Wie geht man mit der leeren Liste um?
+
+Signatur: op tail : List -> List .
+Verhalten: eq tail(cons(I,L)) = L .
+Bei leerer Liste wird die leere Liste zurückgegeben, man könnte hier aber auch einen Fehler zurückgeben.  
+-> eq tail(nil) = nil .
+
+
+(c) Wie wurde sich die Spezifikation ändern, wenn man cons als Infix-Operator ::
+definieren wurde?
+
+Äquivalente Signatur: op _++_ : Int List -> List .
+Bei Gesetzen müssten die Operatoren ausgetauscht oder beide Funktionen als äquivalent angegeben werden:
+eq I++L = cons(I,L) .
+

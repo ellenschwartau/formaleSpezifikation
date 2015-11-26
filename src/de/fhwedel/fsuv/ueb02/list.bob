@@ -1,0 +1,55 @@
+*** Spezifikation von Listen ganzer Zahlen
+
+obj LIST-OF-INT is
+   sort List .
+   protecting INT .
+   op nil : -> List .
+   op cons : Int List -> List .
+   op length : List -> Int .
+   op append : List List -> List .
+   op head : List -> Int .
+   op tail : List -> List .
+   op _++_ : Int List -> List .
+
+   var I : Int . 
+   var L : List .
+   eq length(nil) = 0 .
+   eq length(cons(I,L)) = 1 + length(L) .
+   
+   eq I++L = cons(I,L) .
+
+   eq head(cons(I,L)) = I .
+   
+   eq tail(nil) = nil .
+   eq tail(cons(I,L)) = L .
+
+   vars L1 L2 : List .
+   eq append(nil, L) = L .
+   eq append(cons(I,L1), L2) = cons(I, append(L1, L2)) .
+      
+endo
+
+*** Induktionsanfang
+open LIST-OF-INT .
+
+*** Verankerung
+red append(nil, append(L1,L2)) == append(append(nil,L1),L2) .
+
+*** Gleichung hinzufügen - das können wir jetzt als gegeben annehmen
+eq append(L, append(L1,L2)) = append(append(L,L1),L2) .
+
+red append(cons(1,L), append(L1,L2)) == append(append(cons(1,L),L1),L2) .
+
+
+
+red length(cons(17,cons(-4,cons(329,nil)))) .
+red length(nil) .                     ***> should be 0
+red length(cons(I, nil)) .            ***> should be 1
+red length(cons(I, cons(I, nil))) .   ***> should be 2
+red head(cons(3,nil)) .               ***> should be 3
+
+red head(nil) . 
+red tail(cons(3,nil)) .				  ***> should be nil
+
+red length(I++nil) .				  ***> should be 1
+red head(3 ++ nil) .				  ***> should be 3

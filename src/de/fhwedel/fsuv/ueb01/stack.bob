@@ -31,7 +31,7 @@ obj Stack[E :: DATA] is
   eq pop (empty) = underflow .
   eq pop (underflow) = underflow .
   eq push (X,underflow) = underflow .
-  
+
 endo
 
 reduce top(empty) == topless .

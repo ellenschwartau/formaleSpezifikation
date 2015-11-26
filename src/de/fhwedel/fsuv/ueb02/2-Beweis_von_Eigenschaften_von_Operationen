@@ -1,0 +1,47 @@
+2. Eine wichtige Eigenschaft von Operationen ist die Assoziativität, denn sie ermöglicht eine
+nebenläufige Implementierung der jeweiligen Operation.
+Die in der Listen–Spezifikation definierte Operation append ist assoziativ, also
+
+	∀L1, L2, L3 : append(L1, append(L2, L3)) = append(append(L1, L2), L3).
+
+Glauben wir nur diese Eigenschaft oder können wir sie beweisen? 
+Ein möglicher Beweis führt eine Induktion über die Länge der Liste L1 durch.
+Beweisen Sie bitte mit Hilfe von BOBJ die Assoziativität von append:
+
+
+(a) Wie sieht die Formulierung der Behauptung in BOBJ aus? (Das Gleichheitsprädikat
+ist ==). Wie werden L1, L2, L3 allquantifiziert?
+
+red append(L, append(L1,L2)) = append(append(L,L1),L2) .
+
+
+(b) Beweisen Sie den Induktionsanfang (L1 ist die leere Liste), in dem sie einen geeigneten
+Term reduzieren.
+
+** Induktionsanfang
+open LIST-OF-INT .
+
+	op L1 -> List .
+	op L2 -> List .
+	op L3 -> List .
+
+** Verankerung
+red append(nil, append(L1,L2)) == append(append(nil,L1),L2) .
+
+
+(c) Nehmen Sie die Induktionsvoraussetzung als Gleichung in das BOBJ-System auf.
+Wie sieht sie aus?
+
+eq append(L, append(L1,L2)) = append(append(L,L1),L2) .
+
+
+(d) Beweisen Sie, dass die Behauptung auch fur eine um ein Element verlängerte Liste
+L1 gilt. (Wiederum Reduzieren eines geeigneten Ausdrucks).
+
+red append(cons(1,L), append(L1,L2)) == append(append(cons(1,L),L1),L2) .
+
+
+(e) Warum lässt sich die ursprungliche Behauptung nun auf triviale Weise reduzieren?
+
+Weil wir die Regel in die Definition im Induktionsschritt mit aufgenommen haben.
+
