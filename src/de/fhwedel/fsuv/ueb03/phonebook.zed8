@@ -25,6 +25,7 @@ Operations
 
 The good parts
 
+Zustansschema aber keine Operation (es wird nichts verändert)
 ┌ lookup
   ΞPhoneBook
   name? : NAME
@@ -34,6 +35,7 @@ The good parts
   phone! = tel(name?)
 └
 
+Operation -> hat Zustand der verändert wird
 ┌ addName
   ΔPhoneBook
   name? : NAME
@@ -45,6 +47,7 @@ The good parts
 └
 Könnte man auch mit: known' = known \ { name? } machen
 
+Operation
 ┌ delName
   ΔPhoneBook
   name? : NAME
@@ -61,12 +64,14 @@ Error handling
   REPORT ::= okay | name_not_known | name_already_known
 └
 
+Nur Schema (kein Zustandsschema und auch keine Operation)
 ┌ Success
   rep! : REPORT
 |
   rep! = okay
 └
 
+Zustandsschema
 ┌ NotKnown
   ΞPhoneBook
   name? : NAME
@@ -76,6 +81,7 @@ Error handling
   rep! = name_not_known
 └
 
+Zustandsschema
 ┌ AlreadyKnown
   ΞPhoneBook
   name? : NAME
